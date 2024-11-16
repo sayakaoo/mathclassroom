@@ -1,0 +1,31 @@
+{
+  "applications": {
+    "header": {
+      "url": "https://cdn.example.com/header.js",
+      "scope": "header",
+      "module": "./Header"
+    },
+    "footer": {
+      "url": "https://cdn.example.com/footer.js",
+      "scope": "footer",
+      "module": "./Footer"
+    },
+    "dashboard": {
+      "url": "https://cdn.example.com/dashboard.js",
+      "scope": "dashboard",
+      "module": "./Dashboard"
+    }
+  },
+  "sharedModules": {
+    "react": {
+      "singleton": true,
+      "strictVersion": true,
+      "requiredVersion": "17.0.2"
+    },
+    "react-dom": {
+      "singleton": true,
+      "strictVersion": true,
+      "requiredVersion": "17.0.2"
+    }
+  }
+}
