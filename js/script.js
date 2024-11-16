@@ -270,7 +270,9 @@ window.addEventListener('load', function () {
         const chara = new Image();
         chara.src = "./img/item3.png";  // 画像のURLを指定
         chara.onload = () => {
-            ctx.drawImage(chara, 0, 0);
+            const scaleWidth = 800;  // 画像の幅を200pxに設定
+            const scaleHeight = 800; // 画像の高さを200pxに設定
+            ctx.drawImage(chara, 0, 0, scaleWidth, scaleHeight);
         }
 
     });
