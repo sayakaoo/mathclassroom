@@ -468,59 +468,61 @@ window.addEventListener('load', function () {
 
     //判定用
     // Teachable MachineでエクスポートしたモデルのURL
-const modelURL = "https://teachablemachine.withgoogle.com/models/tLuDsRP9H/";
+    const modelURL = "https://teachablemachine.withgoogle.com/models/tLuDsRP9H/";
 
-// モデルをロード
-let model;
+    // モデルをロード
+    let model;
 
-async function loadModel() {
-    try {
-        model = await tmImage.load(modelURL + "model.json", modelURL + "metadata.json");
-        console.log("モデルが正常に読み込まれました");
-    } catch (error) {
-        console.error("モデルの読み込み中にエラーが発生しました: ", error);
-    }
-}
-
-// キャンバスの内容を予測
-async function predictCanvas() {
-    // キャンバス要素を取得
-    const canvas = document.getElementById("drawing-area");
-    const context = canvas.getContext("2d");
-
-    // キャンバスの画像データを取得
-    const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-    const imageElement = new Image();
-    imageElement.src = canvas.toDataURL();  // キャンバスを画像として変換
-    imageElement.onload = async function () {
-        // モデルに画像を渡して予測
-        await predictImage(imageElement);
-    };
-}
-
-// 画像を予測
-async function predictImage(imageElement) {
-    if (!model) {
-        console.error("モデルがロードされていません");
-        return;
+    async function loadModel() {
+        try {
+            model = await tmImage.load(modelURL + "model.json", modelURL + "metadata.json");
+            console.log("モデルが正常に読み込まれました");
+        } catch (error) {
+            console.error("モデルの読み込み中にエラーが発生しました: ", error);
+        }
     }
 
-    try {
-        const predictions = await model.predict(imageElement);
-        const highestPrediction = predictions.sort((a, b) => b.probability - a.probability)[0];
-        console.log(`予測結果: ${highestPrediction.className}（確率: ${(highestPrediction.probability * 100).toFixed(2)}%）`);
-    } catch (error) {
-        console.error("予測中にエラーが発生しました: ", error);
+    // キャンバスの内容を予測
+    async function predictCanvas() {
+        // キャンバス要素を取得
+        const canvas = document.getElementById("drawing-area");
+        canvas.willReadFrequently = true;  // これを追加
+
+        const context = canvas.getContext("2d");
+
+        // キャンバスの画像データを取得
+        const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+        const imageElement = new Image();
+        imageElement.src = canvas.toDataURL();  // キャンバスを画像として変換
+        imageElement.onload = async function () {
+            // モデルに画像を渡して予測
+            await predictImage(imageElement);
+        };
     }
-}
 
-// '保存'ボタンがクリックされたときに予測を実行
-document.getElementById("save-button").addEventListener("click", async () => {
-    await predictCanvas();  // キャンバスの内容を予測
-});
+    // 画像を予測
+    async function predictImage(imageElement) {
+        if (!model) {
+            console.error("モデルがロードされていません");
+            return;
+        }
 
-// 初期化
-loadModel();
+        try {
+            const predictions = await model.predict(imageElement);
+            const highestPrediction = predictions.sort((a, b) => b.probability - a.probability)[0];
+            console.log(`予測結果: ${highestPrediction.className}（確率: ${(highestPrediction.probability * 100).toFixed(2)}%）`);
+        } catch (error) {
+            console.error("予測中にエラーが発生しました: ", error);
+        }
+    }
+
+    // '保存'ボタンがクリックされたときに予測を実行
+    document.getElementById("save-button").addEventListener("click", async () => {
+        await predictCanvas();  // キャンバスの内容を予測
+    });
+
+    // 初期化
+    loadModel();
 
 
 
