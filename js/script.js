@@ -20,24 +20,6 @@ window.addEventListener('load', function () {
     var text = [];
 
 
-    fetch("/.well-known/vercel/microfrontend-routing", { method: "GET" })
-  .then(response => {
-    if (!response.ok) {
-      console.error("マイクロフロントエンドルーティングデータが見つかりません:", response.status);
-      // エラー時にデフォルトのルートを表示するなど
-      return Promise.reject(new Error("マイクロフロントエンドルーティングデータが見つかりません"));
-    }
-    return response.json(); // または response.text()、期待される形式に応じて
-  })
-  .then(data => {
-    // 取得したデータの処理
-  })
-  .catch(error => {
-    console.error("マイクロフロントエンドルーティングデータの取得エラー:", error);
-    // フォールバックメカニズム
-  });
-
-
     text[0] = [
         "",
         "<fadeIn_chara 1 1>おはよございます。今日の授業を始めていきたいと思います。",
@@ -362,15 +344,26 @@ window.addEventListener('load', function () {
 
         ///消去ボタンクリックで全消去
         clearBtn.addEventListener('click', () => {
+            // キャンバスをクリア
             ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+            // 画像を読み込む
             const chara = new Image();
             chara.src = "./img/item3.png";  // 画像のURLを指定
+        
+            // 画像が読み込まれたら描画
             chara.onload = () => {
                 const scaleWidth = 800;  // 画像の幅を800pxに設定
                 const scaleHeight = 800; // 画像の高さを800pxに設定
                 ctx.drawImage(chara, 0, 0, scaleWidth, scaleHeight);
             };
+        
+            // 画像の読み込みエラー時に備えて
+            chara.onerror = () => {
+                console.error("画像の読み込みに失敗しました");
+            };
         });
+        
 
 
         //判定用
