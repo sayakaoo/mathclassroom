@@ -353,9 +353,7 @@ window.addEventListener('load', function () {
         
             // 画像が読み込まれたら描画
             chara.onload = () => {
-                const scaleWidth = 800;  // 画像の幅を800pxに設定
-                const scaleHeight = 800; // 画像の高さを800pxに設定
-                ctx.drawImage(chara, 0, 0, scaleWidth, scaleHeight);
+                ctx.drawImage(chara, 0, 0);
             };
         
             // 画像の読み込みエラー時に備えて
