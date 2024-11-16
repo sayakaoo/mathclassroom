@@ -19,6 +19,25 @@ window.addEventListener('load', function () {
     let split_chars; //よくわからないけどいるみたい
     var text = [];
 
+
+    fetch("/.well-known/vercel/microfrontend-routing", { method: "GET" })
+  .then(response => {
+    if (!response.ok) {
+      console.error("マイクロフロントエンドルーティングデータが見つかりません:", response.status);
+      // エラー時にデフォルトのルートを表示するなど
+      return Promise.reject(new Error("マイクロフロントエンドルーティングデータが見つかりません"));
+    }
+    return response.json(); // または response.text()、期待される形式に応じて
+  })
+  .then(data => {
+    // 取得したデータの処理
+  })
+  .catch(error => {
+    console.error("マイクロフロントエンドルーティングデータの取得エラー:", error);
+    // フォールバックメカニズム
+  });
+
+
     text[0] = [
         "",
         "<fadeIn_chara 1 1>おはよございます。今日の授業を始めていきたいと思います。",
