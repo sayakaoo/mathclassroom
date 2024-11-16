@@ -286,7 +286,7 @@ window.addEventListener('load', function () {
 
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             const chara = new Image();
-            chara.src = "./img/item3.png";  // 画像のURLを指定
+            chara.src = "/img/item3.png";  // 画像のURLを指定
             chara.onload = () => {
                 const scaleWidth = 800;  // 画像の幅を200pxに設定
                 const scaleHeight = 800; // 画像の高さを200pxに設定
@@ -349,7 +349,7 @@ window.addEventListener('load', function () {
         
             // 画像を読み込む
             const chara = new Image();
-            chara.src = "./img/item3.png";  // 画像のURLを指定
+            chara.src = "/img/item3.png";  // 画像のURLを指定
         
             // 画像が読み込まれたら描画
             chara.onload = () => {
