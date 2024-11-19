@@ -346,22 +346,22 @@ window.addEventListener('load', function () {
         clearBtn.addEventListener('click', () => {
             // キャンバスをクリア
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-        
+
             // 画像を読み込む
             const chara = new Image();
             chara.src = "/img/item3.png";  // 画像のURLを指定
-        
+
             // 画像が読み込まれたら描画
             chara.onload = () => {
                 ctx.drawImage(chara, 0, 0);
             };
-        
+
             // 画像の読み込みエラー時に備えて
             chara.onerror = () => {
                 console.error("画像の読み込みに失敗しました");
             };
         });
-        
+
 
 
         //判定用
@@ -428,5 +428,5 @@ window.addEventListener('load', function () {
 
     }
 
-  
+
 })
