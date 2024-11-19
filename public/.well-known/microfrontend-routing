@@ -1,3 +1,8 @@
 {
-    "message": "Microfrontend routing placeholder"
+    "message": "Microfrontend routing placeholder",
+  "routes": {
+      "/home": "home-app",
+      "/profile": "profile-app"
+  },
+  "version": "1.0.0"
 }
