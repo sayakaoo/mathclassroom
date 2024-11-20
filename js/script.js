@@ -334,16 +334,14 @@ window.addEventListener('load', function () {
     });
 
 
-    //判定用
     // Teachable MachineでエクスポートしたモデルのURL
     const modelURL = "https://teachablemachine.withgoogle.com/models/tLuDsRP9H/";
 
-    // モデルをロード
+    // モデルのロード
     let model;
-
     async function loadModel() {
         try {
-            model = await tmImage.load(modelURL + "model.json", modelURL + "metadata.json");
+            model = await tmImage.load(`${modelURL}model.json`, `${modelURL}metadata.json`);
             console.log("モデルが正常に読み込まれました");
         } catch (error) {
             console.error("モデルの読み込み中にエラーが発生しました: ", error);
@@ -352,20 +350,14 @@ window.addEventListener('load', function () {
 
     // キャンバスの内容を予測
     async function predictCanvas() {
-        // キャンバス要素を取得
         const canvas = document.getElementById("drawing-area");
-        canvas.willReadFrequently = true;  // これを追加
-
+        canvas.willReadFrequently = true; // パフォーマンス向上のため
         const context = canvas.getContext("2d");
 
-        // キャンバスの画像データを取得
-        const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+        // キャンバスを画像に変換
         const imageElement = new Image();
-        imageElement.src = canvas.toDataURL();  // キャンバスを画像として変換
-        imageElement.onload = async function () {
-            // モデルに画像を渡して予測
-            await predictImage(imageElement);
-        };
+        imageElement.src = canvas.toDataURL();
+        imageElement.onload = () => predictImage(imageElement);
     }
 
     // 画像を予測
@@ -379,61 +371,39 @@ window.addEventListener('load', function () {
             const predictions = await model.predict(imageElement);
             const highestPrediction = predictions.sort((a, b) => b.probability - a.probability)[0];
             console.log(`予測結果: ${highestPrediction.className}（確率: ${(highestPrediction.probability * 100).toFixed(2)}%）`);
+
+            // 予測結果に基づいてシナリオを変更
+            changeScenarioBasedOnPrediction(highestPrediction);
         } catch (error) {
             console.error("予測中にエラーが発生しました: ", error);
         }
     }
 
+    // 予測結果に基づいてシナリオを動的に変更
+    function changeScenarioBasedOnPrediction(highestPrediction) {
+        let tagget_str = [];
+        switch (highestPrediction.className) {
+            case "Class 1":
+                tagget_str = ['select1', 'scene1'];
+                break;
+            case "Class 2":
+                tagget_str = ['select1', 'scene2'];
+                break;
+            case "クラス3":
+                tagget_str = ['select2', 'scene1'];
+                break;
+            default:
+                tagget_str = ['select1', 'none'];
+        }
+        main(tagget_str);
+    }
+
     // '保存'ボタンがクリックされたときに予測を実行
-    document.getElementById("save-button").addEventListener("click", async () => {
-        await predictCanvas();  // キャンバスの内容を予測
-    });
+    document.getElementById("save-button").addEventListener("click", predictCanvas);
 
     // 初期化
     loadModel();
 
-    //画像判定シナリオ
-// 予測結果に基づいてシナリオを動的に変更する関数
-function changeScenarioBasedOnPrediction(highestPrediction) {
-    let tagget_str = [];
-    switch (highestPrediction.className) {
-        case "Class 1": // 例えば「クラス1」の場合
-            tagget_str = ['select1', 'scene1']; // シナリオ1
-            break;
-        case "Class 2": // 例えば「クラス2」の場合
-            tagget_str = ['select1', 'scene2']; // シナリオ2
-            break;
-        case "クラス3": // 例えば「クラス3」の場合
-            tagget_str = ['select2', 'scene1']; // シナリオ3
-            break;
-        default:
-            tagget_str = ['select1', 'none']; // デフォルトのシナリオ
-    }
 
-    // シナリオの設定
-    main(tagget_str);
-}
-
-// 予測後にシナリオを変えるための画像認識関数
-async function predictCanvas(imageElement) {
-    if (!model) {
-        console.error("モデルがロードされていません");
-        return;
-    }
-
-    try {
-        const predictions = await model.predict(imageElement);
-        const highestPrediction = predictions.sort((a, b) => b.probability - a.probability)[0];
-        console.log(`予測結果: ${highestPrediction.className}（確率: ${(highestPrediction.probability * 100).toFixed(2)}%）`);
-
-        // 予測結果に基づいてシナリオを変える
-        changeScenarioBasedOnPrediction(highestPrediction);
-
-    } catch (error) {
-        console.error("予測中にエラーが発生しました: ", error);
-    }
-
-    }
-    
 
 })
