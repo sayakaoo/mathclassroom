@@ -426,6 +426,7 @@ window.addEventListener('load', function () {
 
         function submain() {
             var tmp = split_chars.shift();
+            console.log("渡される添付データ:", tmp);
 
             if (tmp == '<') {
                 let tagget_str = '';
@@ -440,6 +441,7 @@ window.addEventListener('load', function () {
                     tagget_str += tmp;  // '>' を追加
                 }
                 tagget_str = tagget_str.split(/\s/);
+                console.log("最終的なタグ文字列:", tagget_str);  // タグ文字列を確認
                 switch (tagget_str[0]) {
                     case 'select1':
                         if (tagget_str[1] === "none") {
