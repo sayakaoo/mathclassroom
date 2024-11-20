@@ -27,7 +27,7 @@ window.addEventListener('load', function () {
     ];
     text[1] = [
         "",
-        "そうですね",
+        "テキスト１",
         "図のようにマッチ棒を並べて、正方形を横につないだ形を作ります。",
         "<select1 1><select2 2><select3 none><text1 10本><text2 わからない><selectBox>正方形を3個作るとき、マッチ棒は何本必要でしょうか？"
     ];
@@ -419,16 +419,21 @@ window.addEventListener('load', function () {
 
         console.log("渡されるシナリオデータ:", tagget_str);
 
+        // split_chars を初期化
+        split_chars = <${...tagget_str.join(" ")}>.split(""); // データを文字列化して配列に分解
+
+        console.log(split_chars);
 
         // main関数を呼び出し
-        main(tagget_str);
-    }
+        main();
+    
 
     // '保存'ボタンがクリックされたときに予測を実行
     document.getElementById("save-button").addEventListener("click", predictCanvas);
 
     // 初期化
     loadModel();
+}
 
 
 
