@@ -426,7 +426,7 @@ async function predictImage(imageElement) {
        console.log("渡されるスプリットデータ:",split_chars);
 
 
-       // main関数を呼び出し
+       // 本当はメイン関数に持っていきたいんだけど，スコープがよくわからないことになるから，いったんサブ作る
        main(split_chars);
    }
 
