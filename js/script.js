@@ -439,6 +439,8 @@ window.addEventListener('load', function () {
     
                 }
 
+                tagget_str = tagget_str.split(/\s/);
+
                 console.log("最終的なタグ文字列:", tagget_str);
     
 
