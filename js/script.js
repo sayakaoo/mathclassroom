@@ -426,7 +426,10 @@ window.addEventListener('load', function () {
         split_chars = tagget_str.join('').split('');
         console.log("split_charsの初期化:", split_chars);
 
-        main(split_chars); // main関数を呼び出す
+        setTimeout(() => {
+            console.log("非同期後のsplit_chars:", split_chars);
+            main(split_chars);
+        }, 1000);
 
 
     }
