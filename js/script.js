@@ -44,6 +44,12 @@ window.addEventListener('load', function () {
     function main() {
         var tmp = split_chars.shift();
 
+        // `split_chars` が未定義または空の場合をチェック
+        if (!Array.isArray(split_chars) || split_chars.length === 0) {
+            console.error("split_charsが未定義または空です:", split_chars);
+            return; // 処理を中断
+        }
+
         if (tmp == '<') {
             let tagget_str = '';
             tmp = split_chars.shift();
@@ -416,6 +422,8 @@ async function predictImage(imageElement) {
 
        // split_chars を初期化
        split_chars = tagget_str.join(" ").split("");  // データを文字列化して配列に分解
+
+       console.log(split_chars);
 
 
        // main関数を呼び出し
