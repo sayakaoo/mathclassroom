@@ -418,14 +418,16 @@ window.addEventListener('load', function () {
         // split_chars を初期化
         split_chars = tagget_str.join(" ").split("");  // データを文字列化して配列に分解
 
-        console.log("渡されるスプリットデータ:", split_chars);
+        console.log("split_chars初期化:", split_chars);
 
+    console.log("渡されるスプリットデータ:", split_chars);
 
         // 本当はメイン関数に持っていきたいんだけど，スコープがよくわからないことになるから，いったんサブ作る
         submain();
 
         function submain() {
             var tmp = split_chars.shift();
+            console.log("最初のtmp:", tmp); // 最初に取得した文字を表示
 
             if (tmp == '<') {
                 let tagget_str = '';
@@ -439,6 +441,8 @@ window.addEventListener('load', function () {
                 if (tmp == '>') {
                     tagget_str += tmp;  // '>' を追加
                 }
+
+                console.log("取得したタグ文字列:", tagget_str);
     
                 // '<' と '>' を取り除き、正しくタグを分解
                 tagget_str = tagget_str.slice(1, -1).split(' ');  // '<select2 2>' -> ['select2', '2']
