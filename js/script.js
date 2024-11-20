@@ -25,10 +25,19 @@ window.addEventListener('load', function () {
         "<item 1><chara 1 0><fadeIn_chara 5 1>図のようにマッチ棒を並べて、正方形を横につないだ形を作ります。",
         "<select1 1><select2 2><select3 none><text1 10本><text2 わからない><selectBox>正方形を3個作るとき、マッチ棒は何本必要でしょうか？"
     ];
+    
+    console.log("main関数呼び出し前のsplit_chars:", split_chars);
 
 
     function main() {
         var tmp = split_chars.shift();
+
+        // `split_chars` が未定義または空の場合をチェック
+    if (!Array.isArray(split_chars) || split_chars.length === 0) {
+        console.error("split_charsが未定義または空です:", split_chars);
+        return; // 処理を中断
+    }
+
         if (tmp == '<') {
             let tagget_str = '';
             tmp = split_chars.shift();
@@ -395,9 +404,18 @@ window.addEventListener('load', function () {
             default:
                 tagget_str = ['select1', 'none'];
         }
-        main(tagget_str);
+    
+        // デバッグ用ログ
+        console.log("渡されるシナリオデータ:", tagget_str);
+    
+        // `main` を呼び出す際に、引数の安全性をチェック
+        if (Array.isArray(tagget_str) && tagget_str.length > 0) {
+            main(tagget_str);
+        } else {
+            console.error("無効なデータが渡されました:", tagget_str);
+        }
     }
-
+    
     // '保存'ボタンがクリックされたときに予測を実行
     document.getElementById("save-button").addEventListener("click", predictCanvas);
 
