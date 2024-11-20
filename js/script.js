@@ -429,23 +429,16 @@ window.addEventListener('load', function () {
             var tmp = split_chars.shift();
             console.log("最初のtmp:", tmp); // 最初に取得した文字を表示
 
+
             if (tmp == '<') {
                 let tagget_str = '';
                 tmp = split_chars.shift();
-                while (tmp != '>' && split_chars.length > 0) {
-                    tagget_str += tmp;  // 文字を連結
-                    tmp = split_chars.shift();  // 次の文字を取得
-                }
+                while (tmp != '>') {
+                    tagget_str += tmp;
+                    tmp = split_chars.shift();
     
-                // '>' を取り除く
-                if (tmp == '>') {
-                    tagget_str += tmp;  // '>' を追加
                 }
 
-                console.log("取得したタグ文字列:", tagget_str);
-    
-                // '<' と '>' を取り除き、正しくタグを分解
-                tagget_str = tagget_str.slice(1, -1).split(' ');  // '<select2 2>' -> ['select2', '2']
                 console.log("最終的なタグ文字列:", tagget_str);
     
 
