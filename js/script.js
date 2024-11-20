@@ -42,7 +42,6 @@ window.addEventListener('load', function () {
 
 
     function main() {
-        var tmp = split_chars.shift();
          // split_charsが無効または空の場合のエラーハンドリング
     if (!Array.isArray(split_chars) || split_chars.length === 0) {
         console.error("split_charsが無効または空です:", split_chars);
@@ -51,10 +50,12 @@ window.addEventListener('load', function () {
         return;
     }
 
+    var tmp = split_chars.shift();
+
         if (tmp == '<') {
             let tagget_str = '';
             tmp = split_chars.shift();
-            while (tmp != '>') {
+            while (tmp != '>'&& tmp !== undefined) {
                 tagget_str += tmp;
                 tmp = split_chars.shift();
 
