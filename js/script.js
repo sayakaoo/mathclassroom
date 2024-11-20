@@ -42,20 +42,20 @@ window.addEventListener('load', function () {
 
 
     function main() {
-         // split_charsが無効または空の場合のエラーハンドリング
-    if (!Array.isArray(split_chars) || split_chars.length === 0) {
-        console.error("split_charsが無効または空です:", split_chars);
-        stop_flg = true; // 処理を止める
-        mess_text.innerHTML += '<span class="blink-text"></span>';
-        return;
-    }
+        // split_charsが無効または空の場合のエラーハンドリング
+        if (!Array.isArray(split_chars) || split_chars.length === 0) {
+            console.error("split_charsが無効または空です:", split_chars);
+            stop_flg = true; // 処理を止める
+            mess_text.innerHTML += '<span class="blink-text"></span>';
+            return;
+        }
 
-    var tmp = split_chars.shift();
+        var tmp = split_chars.shift();
 
         if (tmp == '<') {
             let tagget_str = '';
             tmp = split_chars.shift();
-            while (tmp != '>'&& tmp !== undefined) {
+            while (tmp != '>' && tmp !== undefined) {
                 tagget_str += tmp;
                 tmp = split_chars.shift();
 
@@ -422,12 +422,11 @@ window.addEventListener('load', function () {
 
         console.log("渡されるシナリオデータ:", tagget_str);
 
-        // tagget_strが配列であることを確認してからmain関数を呼び出す
-        if (Array.isArray(tagget_str) && tagget_str.length > 0) {
-            main(tagget_str);
-        } else {
-            console.error('渡されたシナリオデータが無効です:', tagget_str);
-        }
+        // split_charsを初期化
+        split_chars = tagget_str.join('').split('');
+        console.log("split_charsの初期化:", split_chars);
+
+        main(); // main関数を呼び出す
 
 
     }
