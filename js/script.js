@@ -415,99 +415,19 @@ window.addEventListener('load', function () {
 
         console.log("渡されるシナリオデータ:", tagget_str);
 
-        // split_chars を初期化
-        split_chars = tagget_str.join(" ").split("");  // データを文字列化して配列に分解
-
-        console.log("split_chars初期化:", split_chars);
-
-    console.log("渡されるスプリットデータ:", split_chars);
-
         // 本当はメイン関数に持っていきたいんだけど，スコープがよくわからないことになるから，いったんサブ作る
-        submain();
-
-        function submain() {
-            var tmp = split_chars.shift();
-            console.log("最初のtmp:", tmp); // 最初に取得した文字を表示
+        main(tagget_str);
 
 
-            if (tmp == '<') {
-                let tagget_str = '';
-                tmp = split_chars.shift();
-                while (tmp != '>') {
-                    tagget_str += tmp;
-                    tmp = split_chars.shift();
-    
-                }
-
-                tagget_str = tagget_str.split(/\s/);
-
-                console.log("最終的なタグ文字列:", tagget_str);
-    
-
-                switch (tagget_str[0]) {
-                    case 'select1':
-                        if (tagget_str[1] === "none") {
-                            $('#select1').addClass('none');
-                        } else {
-                            select_num1 = tagget_str[1];
-                            select1.addEventListener('click', function () {
-                                scene_cnt = select_num1;
-                                line_cnt = -1;
-                                $('.selectBox').removeClass('show');
-                                selectNoneRemove();
-                                textClick();
-                            });
-                        }
-                        break;
-                    case 'select2':
-                        if (tagget_str[1] === "none") {
-                            $('#select2').addClass('none');
-                        } else {
-                            select_num2 = tagget_str[1];
-                            select2.addEventListener('click', function () {
-                                scene_cnt = select_num2;
-                                line_cnt = -1;
-                                $('.selectBox').removeClass('show');
-                                selectNoneRemove();
-                                textClick();
-                            });
-                        }
-                        break;
-                    case 'select3':
-                        if (tagget_str[1] === "none") {
-                            $('#select3').addClass('none');
-                        } else {
-                            select_num3 = tagget_str[1];
-                            select3.addEventListener('click', function () {
-                                scene_cnt = select_num3;
-                                line_cnt = -1;
-                                $('.selectBox').removeClass('show');
-                                selectNoneRemove();
-                                textClick();
-                            });
-                        }
-                        break;
-                }
-            }
-            if (!stop_flg) {
-                if (tmp) {
-                    if (tmp != '>') mess_text.innerHTML += tmp;
-                    setTimeout(main, interval);
-    
-                }
-            } else {
-                mess_text.innerHTML += '<span class="blink-text"></span>';
-            }
-        }
     }
 
 
 
-        // '保存'ボタンがクリックされたときに予測を実行
-        document.getElementById("save-button").addEventListener("click", predictCanvas);
+    // '保存'ボタンがクリックされたときに予測を実行
+    document.getElementById("save-button").addEventListener("click", predictCanvas);
 
-        // 初期化
-        loadModel();
+    // 初期化
+    loadModel();
 
 
-    })
+})
