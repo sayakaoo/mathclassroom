@@ -427,18 +427,17 @@ window.addEventListener('load', function () {
         function submain() {
             var tmp = split_chars.shift();
 
-
-
-            console.log("渡される添付データ:", tmp);
-
-            while (split_chars.length > 0) {
             if (tmp == '<') {
                 let tagget_str = '';
                 tmp = split_chars.shift();
-                while (tmp != '>') {
-                    tagget_str += tmp;
-                    tmp = split_chars.shift();
-
+                while (tmp != '>' && split_chars.length > 0) {
+                    tagget_str += tmp;  // 文字を連結
+                    tmp = split_chars.shift();  // 次の文字を取得
+                }
+                
+                // '>' を取り除く
+                if (tmp == '>') {
+                    tagget_str += tmp;  // '>' を追加
                 }
                 tagget_str = tagget_str.split(/\s/);
                 switch (tagget_str[0]) {
@@ -485,7 +484,7 @@ window.addEventListener('load', function () {
                         }
                         break;
                 }
-            }
+            
         }
         }
 
