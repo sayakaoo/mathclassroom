@@ -405,13 +405,13 @@ window.addEventListener('load', function () {
         let tagget_str = [];
         switch (highestPrediction.className) {
             case "Class 1":
-                tagget_str = ['select1', 'scene1'];
+                tagget_str = ['select1', '1'];
                 break;
             case "Class 2":
-                tagget_str = ['select1', 'scene2'];
+                tagget_str = ['select1', '2'];
                 break;
             case "クラス3":
-                tagget_str = ['select2', 'scene1'];
+                tagget_str = ['select2', '1'];
                 break;
             default:
                 tagget_str = ['select1', 'none'];
@@ -419,13 +419,9 @@ window.addEventListener('load', function () {
 
         console.log("渡されるシナリオデータ:", tagget_str);
 
-        // `split_chars` を初期化
-        split_chars = `<${tagget_str.join(" ")}>`.split(""); // データを文字列化して配列に分解
-
-        console.log(split_chars);
 
         // main関数を呼び出し
-        main(split_chars);
+        main(tagget_str);
     }
 
     // '保存'ボタンがクリックされたときに予測を実行
