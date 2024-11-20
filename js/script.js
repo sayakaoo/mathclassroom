@@ -50,6 +50,8 @@ window.addEventListener('load', function () {
 
         var tmp = split_chars.shift();
 
+        console.log(tmp);
+
         if (tmp == '<') {
             let tagget_str = '';
             tmp = split_chars.shift();
@@ -407,6 +409,7 @@ window.addEventListener('load', function () {
         switch (highestPrediction.className) {
             case "Class 1":
                 tagget_str = ["<select1 1>"];
+                //もうここに文章を入れることにしようか
                 break;
             case "Class 2":
                 tagget_str = ["<select2 2>"];
