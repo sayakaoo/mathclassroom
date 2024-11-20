@@ -422,13 +422,7 @@ window.addEventListener('load', function () {
         }
 
         console.log("渡されるシナリオデータ:", split_chars);
-
-
-        setTimeout(() => {
-            console.log("非同期後のsplit_chars:", split_chars);
-            main(split_chars);
-        }, 1000);
-
+        main(split_chars);
 
     }
 
