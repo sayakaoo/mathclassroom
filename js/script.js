@@ -423,7 +423,7 @@ async function predictImage(imageElement) {
        // split_chars を初期化
        split_chars = tagget_str.join(" ").split("");  // データを文字列化して配列に分解
 
-       console.log(split_chars);
+       console.log("渡されるスプリットデータ:",split_chars);
 
 
        // main関数を呼び出し
