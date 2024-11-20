@@ -484,11 +484,12 @@ window.addEventListener('load', function () {
             }
         }
 
-        // '保存'ボタンがクリックされたときに予測を実行
-        document.getElementById("save-button").addEventListener("click", predictCanvas);
+    }
+    // '保存'ボタンがクリックされたときに予測を実行
+    document.getElementById("save-button").addEventListener("click", predictCanvas);
 
-        // 初期化
-        loadModel();
+    // 初期化
+    loadModel();
 
 
-    })
+})
