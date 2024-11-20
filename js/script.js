@@ -392,47 +392,48 @@ window.addEventListener('load', function () {
     // 初期化
     loadModel();
 
-      //画像判定シナリオ
-    // 予測結果に基づいてシナリオを動的に変更する関数
-    function changeScenarioBasedOnPrediction(prediction) {
-        let tagget_str = [];
-        switch (highestPrediction.className) {
-            case "Class 1": // 例えば「クラス1」の場合
-                tagget_str = ['select1', 'scene1']; // シナリオ1
-                break;
-            case "Class 2": // 例えば「クラス2」の場合
-                tagget_str = ['select1', 'scene2']; // シナリオ2
-                break;
-            case "クラス3": // 例えば「クラス3」の場合
-                tagget_str = ['select2', 'scene1']; // シナリオ3
-                break;
-            default:
-                tagget_str = ['select1', 'none']; // デフォルトのシナリオ
-        }
-
-        // シナリオの設定
-        main(tagget_str);
+    //画像判定シナリオ
+// 予測結果に基づいてシナリオを動的に変更する関数
+function changeScenarioBasedOnPrediction(highestPrediction) {
+    let tagget_str = [];
+    switch (highestPrediction.className) {
+        case "Class 1": // 例えば「クラス1」の場合
+            tagget_str = ['select1', 'scene1']; // シナリオ1
+            break;
+        case "Class 2": // 例えば「クラス2」の場合
+            tagget_str = ['select1', 'scene2']; // シナリオ2
+            break;
+        case "クラス3": // 例えば「クラス3」の場合
+            tagget_str = ['select2', 'scene1']; // シナリオ3
+            break;
+        default:
+            tagget_str = ['select1', 'none']; // デフォルトのシナリオ
     }
 
-    // 予測後にシナリオを変えるための画像認識関数
-    async function predictCanvas(imageElement) {
-        if (!model) {
-            console.error("モデルがロードされていません");
-            return;
-        }
+    // シナリオの設定
+    main(tagget_str);
+}
 
-        try {
-            const predictions = await model.predict(imageElement);
-            const highestPrediction = predictions.sort((a, b) => b.probability - a.probability)[0];
-            console.log(`予測結果: ${highestPrediction.className}（確率: ${(highestPrediction.probability * 100).toFixed(2)}%）`);
-
-            // 予測結果に基づいてシナリオを変える
-            changeScenarioBasedOnPrediction(highestPrediction.className);
-
-        } catch (error) {
-            console.error("予測中にエラーが発生しました: ", error);
-        }
+// 予測後にシナリオを変えるための画像認識関数
+async function predictCanvas(imageElement) {
+    if (!model) {
+        console.error("モデルがロードされていません");
+        return;
     }
 
+    try {
+        const predictions = await model.predict(imageElement);
+        const highestPrediction = predictions.sort((a, b) => b.probability - a.probability)[0];
+        console.log(`予測結果: ${highestPrediction.className}（確率: ${(highestPrediction.probability * 100).toFixed(2)}%）`);
+
+        // 予測結果に基づいてシナリオを変える
+        changeScenarioBasedOnPrediction(highestPrediction);
+
+    } catch (error) {
+        console.error("予測中にエラーが発生しました: ", error);
+    }
+
+    }
+    
 
 })
