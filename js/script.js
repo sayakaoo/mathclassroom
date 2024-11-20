@@ -423,7 +423,7 @@ window.addEventListener('load', function () {
         split_chars = `<${tagget_str.join(" ")}>`.split(""); // データを文字列化して配列に分解
 
         // main関数を呼び出し
-        main(tagget_str);
+        main(split_chars);
     }
 
     // '保存'ボタンがクリックされたときに予測を実行
