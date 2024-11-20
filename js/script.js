@@ -422,7 +422,7 @@ window.addEventListener('load', function () {
         }
 
         console.log("渡されるシナリオデータ:", split_chars);
-        main(split_chars);
+        main();
 
     }
 
