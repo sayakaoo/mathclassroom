@@ -407,11 +407,11 @@ window.addEventListener('load', function () {
     function changeScenarioBasedOnPrediction(highestPrediction) {
         switch (highestPrediction.className) {
             case "Class 1":
-                split_chars = ['<', 's', 'e', 'l', 'e', 'c', 't', '1', ' ', '1', '>'];
+                split_chars = ['<', 's', 'k', 'i', 'p', ' ', '2', '>'];
                 //もうここに文章を入れることにしようか
                 break;
             case "Class 2":
-                split_chars = ['<', 's', 'e', 'l', 'e', 'c', 't', '2', ' ', '2', '>'];
+                split_chars = ['<', 's', 'k', 'i', 'p', ' ', '2', '>'];
                 break;
             case "クラス3":
                 split_chars = ['select2', 'scene1'];
