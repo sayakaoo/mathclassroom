@@ -405,27 +405,24 @@ window.addEventListener('load', function () {
 
     // 予測結果に基づいてシナリオを動的に変更
     function changeScenarioBasedOnPrediction(highestPrediction) {
-        let tagget_str = [];
+        let split_chars;
         switch (highestPrediction.className) {
             case "Class 1":
-                tagget_str = ["<select1 1>"];
+                split_chars = ["<select1 1>"];
                 //もうここに文章を入れることにしようか
                 break;
             case "Class 2":
-                tagget_str = ["<select2 2>"];
+                split_chars = ["<select2 2>"];
                 break;
             case "クラス3":
-                tagget_str = ['select2', 'scene1'];
+                split_chars = ['select2', 'scene1'];
                 break;
             default:
-                tagget_str = ['select1', 'none'];
+                split_chars = ['select1', 'none'];
         }
 
-        console.log("渡されるシナリオデータ:", tagget_str);
+        console.log("渡されるシナリオデータ:", split_chars);
 
-        // split_charsを初期化
-        split_chars = tagget_str.join('').split('');
-        console.log("split_charsの初期化:", split_chars);
 
         setTimeout(() => {
             console.log("非同期後のsplit_chars:", split_chars);
