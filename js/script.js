@@ -489,6 +489,15 @@ window.addEventListener('load', function () {
                         break;
                 }
             }
+            if (!stop_flg) {
+                if (tmp) {
+                    if (tmp != '>') mess_text.innerHTML += tmp;
+                    setTimeout(main, interval);
+    
+                }
+            } else {
+                mess_text.innerHTML += '<span class="blink-text"></span>';
+            }
         }
     }
 
