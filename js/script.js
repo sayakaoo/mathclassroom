@@ -407,10 +407,10 @@ window.addEventListener('load', function () {
         let tagget_str = [];
         switch (highestPrediction.className) {
             case "Class 1":
-                tagget_str = ['<select1 1>'];
+                tagget_str = ["<select1 1>"];
                 break;
             case "Class 2":
-                tagget_str = ['<select2 2>'];
+                tagget_str = ["<select2 2>"];
                 break;
             case "クラス3":
                 tagget_str = ['select2', 'scene1'];
