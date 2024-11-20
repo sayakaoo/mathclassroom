@@ -415,8 +415,12 @@ window.addEventListener('load', function () {
 
         console.log("渡されるシナリオデータ:", tagget_str);
 
-        // 本当はメイン関数に持っていきたいんだけど，スコープがよくわからないことになるから，いったんサブ作る
-        main(tagget_str);
+        // tagget_strが配列であることを確認してからmain関数を呼び出す
+        if (Array.isArray(tagget_str) && tagget_str.length > 0) {
+            main(tagget_str);
+        } else {
+            console.error('渡されたシナリオデータが無効です:', tagget_str);
+        }
 
 
     }
