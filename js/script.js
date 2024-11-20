@@ -44,12 +44,6 @@ window.addEventListener('load', function () {
     function main() {
         var tmp = split_chars.shift();
 
-        // `split_chars` が未定義または空の場合をチェック
-        if (!Array.isArray(split_chars) || split_chars.length === 0) {
-            console.error("split_charsが未定義または空です:", split_chars);
-            return; // 処理を中断
-        }
-
         if (tmp == '<') {
             let tagget_str = '';
             tmp = split_chars.shift();
@@ -406,10 +400,10 @@ async function predictImage(imageElement) {
        let tagget_str = [];
        switch (highestPrediction.className) {
            case "Class 1":
-               tagget_str = ['<select1>', '1'];
+               tagget_str = ['<select1 1>'];
                break;
            case "Class 2":
-               tagget_str = ['<select2>', '2'];
+               tagget_str = ['<select2 2>'];
                break;
            case "クラス3":
                tagget_str = ['select2', 'scene1'];
@@ -427,7 +421,7 @@ async function predictImage(imageElement) {
 
 
        // main関数を呼び出し
-       main(split_chars);
+       main();
    }
 
    // '保存'ボタンがクリックされたときに予測を実行
