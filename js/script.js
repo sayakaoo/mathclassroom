@@ -382,23 +382,24 @@ window.addEventListener('load', function () {
    }
 
    // 画像を予測
-   async function predictImage(imageElement) {
-       if (!model) {
-           console.error("モデルがロードされていません");
-           return;
-       }
+async function predictImage(imageElement) {
+    if (!model) {
+        console.error("モデルがロードされていません");
+        return;
+    }
 
-       try {
-           const predictions = await model.predict(imageElement);
-           const highestPrediction = predictions.sort((a, b) => b.probability - a.probability)[0];
-           console.log(予測結果: ${highestPrediction.className}（確率: ${(highestPrediction.probability * 100).toFixed(2)}%）);
+    try {
+        const predictions = await model.predict(imageElement);
+        const highestPrediction = predictions.sort((a, b) => b.probability - a.probability)[0];
+        console.log(`予測結果: ${highestPrediction.className}（確率: ${(highestPrediction.probability * 100).toFixed(2)}%）`);
 
-           // 予測結果に基づいてシナリオを変更
-           changeScenarioBasedOnPrediction(highestPrediction);
-       } catch (error) {
-           console.error("予測中にエラーが発生しました: ", error);
-       }
-   }
+        // 予測結果に基づいてシナリオを変更
+        changeScenarioBasedOnPrediction(highestPrediction);
+    } catch (error) {
+        console.error("予測中にエラーが発生しました: ", error);
+    }
+}
+
 
    // 予測結果に基づいてシナリオを動的に変更
    function changeScenarioBasedOnPrediction(highestPrediction) {
@@ -422,9 +423,11 @@ window.addEventListener('load', function () {
        // split_chars を初期化
        split_chars = tagget_str.join(" ").split("");  // データを文字列化して配列に分解
 
+       console.log(split_chars);
+
 
        // main関数を呼び出し
-       main();
+       main(split_chars);
    }
 
    // '保存'ボタンがクリックされたときに予測を実行
@@ -432,7 +435,6 @@ window.addEventListener('load', function () {
 
    // 初期化
    loadModel();
-
 
 
 })
