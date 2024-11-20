@@ -441,7 +441,7 @@ window.addEventListener('load', function () {
                 }
 
                 // '<' と '>' を取り除き、正しくタグを分解
-                tagget_str = tagget_str.slice(1, -1).split(' ');  // '<select2 2>' -> ['select2', '2']
+                tagget_str = tagget_str.slice(0, -1).split(' ');  // '<select2 2>' -> ['select2', '2']
                 console.log("最終的なタグ文字列:", tagget_str);
 
                 switch (tagget_str[0]) {
