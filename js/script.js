@@ -45,9 +45,7 @@ window.addEventListener('load', function () {
         // split_charsが無効または空の場合のエラーハンドリング
         if (!Array.isArray(split_chars) || split_chars.length === 0) {
             console.error("split_charsが無効または空です:", split_chars);
-            stop_flg = true; // 処理を止める
-            mess_text.innerHTML += '<span class="blink-text"></span>';
-            return;
+            mess_text.innerHTML += '<span class="blink-text"></span>';          
         }
 
         var tmp = split_chars.shift();
