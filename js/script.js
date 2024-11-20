@@ -25,6 +25,18 @@ window.addEventListener('load', function () {
         "<item 1><chara 1 0><fadeIn_chara 5 1>図のようにマッチ棒を並べて、正方形を横につないだ形を作ります。",
         "<select1 1><select2 2><select3 none><text1 10本><text2 わからない><selectBox>正方形を3個作るとき、マッチ棒は何本必要でしょうか？"
     ];
+    text[1] = [
+        "",
+        "そうですね",
+        "図のようにマッチ棒を並べて、正方形を横につないだ形を作ります。",
+        "<select1 1><select2 2><select3 none><text1 10本><text2 わからない><selectBox>正方形を3個作るとき、マッチ棒は何本必要でしょうか？"
+    ];
+    text[2] = [
+        "",
+        "テキスト２",
+        "図のようにマッチ棒を並べて、正方形を横につないだ形を作ります。",
+        "<select1 1><select2 2><select3 none><text1 10本><text2 わからない><selectBox>正方形を3個作るとき、マッチ棒は何本必要でしょうか？"
+    ];
 
     console.log("main関数呼び出し前のsplit_chars:", split_chars);
 
