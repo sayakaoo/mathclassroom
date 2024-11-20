@@ -44,6 +44,8 @@ window.addEventListener('load', function () {
     function main() {
         var tmp = split_chars.shift();
 
+        console.log("渡される添付データ:", tmp);
+
 
         if (tmp == '<') {
             let tagget_str = '';
