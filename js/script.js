@@ -426,7 +426,6 @@ window.addEventListener('load', function () {
 
         function submain() {
             var tmp = split_chars.shift();
-            console.log("渡される添付データ:", tmp);
 
             if (tmp == '<') {
                 let tagget_str = '';
@@ -435,13 +434,16 @@ window.addEventListener('load', function () {
                     tagget_str += tmp;  // 文字を連結
                     tmp = split_chars.shift();  // 次の文字を取得
                 }
-                
+
                 // '>' を取り除く
                 if (tmp == '>') {
                     tagget_str += tmp;  // '>' を追加
                 }
-                tagget_str = tagget_str.split(/\s/);
-                console.log("最終的なタグ文字列:", tagget_str);  // タグ文字列を確認
+
+                // スペースで分割
+                tagget_str = tagget_str.slice(1, -1).split(' ');  // '<select2 2>' -> ['select2', '2']
+                console.log("最終的なタグ文字列:", tagget_str);
+
                 switch (tagget_str[0]) {
                     case 'select1':
                         if (tagget_str[1] === "none") {
@@ -486,9 +488,9 @@ window.addEventListener('load', function () {
                         }
                         break;
                 }
-            
+            }
         }
-        }
+
 
     }
     // '保存'ボタンがクリックされたときに予測を実行
