@@ -51,7 +51,6 @@ window.addEventListener('load', function () {
         var tmp = split_chars.shift();
 
         console.log(split_chars);
-        console.log(tmp);
 
         if (tmp == '<') {
             let tagget_str = '';
