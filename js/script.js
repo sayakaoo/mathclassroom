@@ -405,7 +405,6 @@ window.addEventListener('load', function () {
 
     // 予測結果に基づいてシナリオを動的に変更
     function changeScenarioBasedOnPrediction(highestPrediction) {
-        let split_chars;
         switch (highestPrediction.className) {
             case "Class 1":
                 split_chars = ["<select1 1>"];
