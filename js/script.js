@@ -422,7 +422,7 @@ window.addEventListener('load', function () {
 
 
         // 本当はメイン関数に持っていきたいんだけど，スコープがよくわからないことになるから，いったんサブ作る
-        submain(split_chars);
+        submain();
 
         function submain() {
             var tmp = split_chars.shift();
@@ -431,7 +431,7 @@ window.addEventListener('load', function () {
 
             console.log("渡される添付データ:", tmp);
 
-
+            while (split_chars.length > 0) {
             if (tmp == '<') {
                 let tagget_str = '';
                 tmp = split_chars.shift();
@@ -486,6 +486,7 @@ window.addEventListener('load', function () {
                         break;
                 }
             }
+        }
         }
 
     }
