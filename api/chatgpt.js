@@ -1,10 +1,6 @@
 // ChatGPTにメッセージを送信して応答を取得する関数
-require('dotenv').config();  // dotenvを読み込む
-
-const axios = require('axios');
-
 // OpenAIのAPIキーを環境変数から取得
-require('dotenv').config();  // dotenvを読み込む
+import('dotenv').config();  // dotenvを読み込む
 
 const axios = require('axios');
 
@@ -36,7 +32,6 @@ async function getChatGPTResponse(userInput) {
     }
 }
 
-module.exports = { getChatGPTResponse };
 
 
 // エクスポートして他のファイルから利用できるようにする
