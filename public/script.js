@@ -434,4 +434,34 @@ window.addEventListener('load', function () {
     loadModel();
 
 
+    //chatgpt用
+    const { getChatGPTResponse } = require('./chatgpt');  // chatgpt.jsをインポート
+
+document.getElementById('sendButton').addEventListener('click', async function() {
+    const userInput = document.getElementById('userInput').value;
+    if (userInput.trim()) {
+        // ユーザーのメッセージをチャットボックスに追加
+        const messageDiv = document.createElement('div');
+        messageDiv.textContent = `ユーザー: ${userInput}`;
+        document.getElementById('messages').appendChild(messageDiv);
+        
+        // 入力欄をクリア
+        document.getElementById('userInput').value = '';
+
+        // ChatGPTの応答を取得
+        const gptResponse = await getChatGPTResponse(userInput);
+        
+        // ChatGPTの応答を表示
+        const responseDiv = document.createElement('div');
+        responseDiv.textContent = `ChatGPT: ${gptResponse}`;
+        document.getElementById('messages').appendChild(responseDiv);
+        
+        // メッセージが表示されるたびにスクロールを最下部に
+        document.getElementById('messages').scrollTop = document.getElementById('messages').scrollHeight;
+    }
+});
+
+    
+
+
 })
