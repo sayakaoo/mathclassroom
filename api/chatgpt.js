@@ -5,6 +5,10 @@ const axios = require('axios');
 
 // OpenAIのAPIキーを環境変数から取得
 const apiKey = process.env.OPENAI_API_KEY;
+if (!apiKey) {
+    return res.status(500).json({ error: 'APIキーが設定されていません' });
+}
+
 
 async function getChatGPTResponse(userInput) {
     try {
