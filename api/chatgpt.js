@@ -1,6 +1,5 @@
 // ChatGPTにメッセージを送信して応答を取得する関数
 // OpenAIのAPIキーを環境変数から取得
-import('dotenv').config();  // dotenvを読み込む
 
 const axios = require('axios');
 
