@@ -435,13 +435,11 @@ window.addEventListener('load', function () {
 
 
     //chatgpt用
-    const { getChatGPTResponse } = require('./chatgpt');  // chatgpt.jsをインポート
-
 document.getElementById('sendButton').addEventListener('click', async function() {
     const userInput = document.getElementById('userInput').value;
     if (userInput.trim()) {
         // ユーザーのメッセージをチャットボックスに追加
-        console.log("osita");
+        console.log("Message sent: ", userInput);
         const messageDiv = document.createElement('div');
         messageDiv.textContent = `ユーザー: ${userInput}`;
         document.getElementById('messages').appendChild(messageDiv);
@@ -462,7 +460,23 @@ document.getElementById('sendButton').addEventListener('click', async function()
     }
 });
 
+// ChatGPTにメッセージを送信して応答を取得する関数
+async function getChatGPTResponse(userInput) {
+    const response = await fetch('/api/chatgpt', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ userInput })
+    });
+
+    const data = await response.json();
+    return data.text;
+}
+
+});
+
     
 
 
-})
+
