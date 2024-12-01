@@ -1,14 +1,8 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "api/chatgpt.js",
-      "use": "@vercel/node"
-    }
-  ],
   "routes": [
     {
-      "src": "/api/chatgpt",
+      "src": "/api/(.*)",
       "dest": "/api/chatgpt.js"
     }
   ]
