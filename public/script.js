@@ -463,7 +463,7 @@ document.getElementById('sendButton').addEventListener('click', async function()
 // ChatGPTにメッセージを送信して応答を取得する関数
 async function getChatGPTResponse(userInput) {
     try {
-        const response = await fetch('/api/chatgpt', {
+        const response = await fetch('./api/chatgpt', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
