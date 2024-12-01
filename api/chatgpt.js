@@ -25,11 +25,13 @@ async function getChatGPTResponse(userInput) {
             }
         );
         
-        return response.data.choices[0].text.trim();
-    } catch (error) {
-        console.error('Error fetching response from ChatGPT:', error);
-        return 'エラーが発生しました。もう一度試してください。';
-    }
+        console.log('ChatGPTの応答:', response.data.choices[0].text.trim());
+                document.getElementById('response').innerText = 'ChatGPTの応答: ' + response.data.choices[0].text.trim();
+            } catch (error) {
+                // エラーが発生した場合
+                console.error('エラー:', error);
+                document.getElementById('response').innerText = 'エラーが発生しました。もう一度試してください。';
+            }
 }
 
 
