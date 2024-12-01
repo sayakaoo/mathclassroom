@@ -1,43 +1,43 @@
-// ChatGPTにメッセージを送信して応答を取得する関数
-// OpenAIのAPIキーを環境変数から取得
+import axios from 'axios';
 
-const axios = require('axios');
+export default async function handler(req, res) {
+    if (req.method !== 'POST') {
+        res.status(405).json({ error: 'Method not allowed' });
+        return;
+    }
 
-// OpenAIのAPIキーを環境変数から取得
-const apiKey = process.env.OPENAI_API_KEY;
-if (!apiKey) {
-    return res.status(500).json({ error: 'APIキーが設定されていません' });
-}
+    const apiKey = process.env.OPENAI_API_KEY;
+    if (!apiKey) {
+        res.status(500).json({ error: 'APIキーが設定されていません' });
+        return;
+    }
 
+    const { prompt } = req.body;
+    if (!prompt) {
+        res.status(400).json({ error: 'Promptが提供されていません' });
+        return;
+    }
 
-async function getChatGPTResponse(userInput) {
     try {
         const response = await axios.post(
             'https://api.openai.com/v1/completions',
             {
-                model: 'gpt-3.5-turbo',
-                prompt: userInput,
+                model: 'text-davinci-003',
+                prompt: prompt,
                 max_tokens: 150,
                 temperature: 0.7,
             },
             {
                 headers: {
-                    'Authorization': `Bearer ${apiKey}`,
+                    Authorization: `Bearer ${apiKey}`,
                     'Content-Type': 'application/json',
-                }
+                },
             }
         );
-        
-        console.log('ChatGPTの応答:', response.data.choices[0].text.trim());
-                document.getElementById('response').innerText = 'ChatGPTの応答: ' + response.data.choices[0].text.trim();
-            } catch (error) {
-                // エラーが発生した場合
-                console.error('エラー:', error);
-                document.getElementById('response').innerText = 'エラーが発生しました。もう一度試してください。';
-            }
+
+        res.status(200).json({ text: response.data.choices[0].text.trim() });
+    } catch (error) {
+        console.error('エラー:', error.message);
+        res.status(500).json({ error: 'ChatGPT APIの呼び出しに失敗しました' });
+    }
 }
-
-
-
-// エクスポートして他のファイルから利用できるようにする
-module.exports = { getChatGPTResponse };
