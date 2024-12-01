@@ -1,4 +1,4 @@
-import axios from 'axios';
+const axios = require('axios');
 
 export default async function handler(req, res) {
     // POSTリクエスト以外の場合はエラーレスポンスを返す
