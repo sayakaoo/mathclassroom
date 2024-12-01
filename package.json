@@ -1,9 +1,10 @@
 {
   "name": "1201-chatbot-edit",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "api/chatgpt.js",
   "scripts": {
     "start": "node api/chatgpt.js",
+    "dev": "node api/chatgpt.js", 
     "test": "echo \"Error: no test specified\" && exit 1"
   
   },
