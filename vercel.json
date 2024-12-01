@@ -1,0 +1,9 @@
+{
+  "builds": [
+    {
+      "src": "api/chatgpt.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "installCommand": "npm install"
+}
