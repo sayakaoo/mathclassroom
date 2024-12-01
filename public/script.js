@@ -462,17 +462,35 @@ document.getElementById('sendButton').addEventListener('click', async function()
 
 // ChatGPTにメッセージを送信して応答を取得する関数
 async function getChatGPTResponse(userInput) {
-    const response = await fetch('/api/chatgpt', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ userInput })
-    });
+    try {
+        const response = await fetch('/api/chatgpt', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ userInput: userInput })
+        });
 
-    const data = await response.json();
-    return data.text;
+        if (!response.ok) {
+            throw new Error('APIから正しいレスポンスを受け取れませんでした');
+        }
+
+        // レスポンスをJSON形式でパース
+        const data = await response.json();
+        
+        if (data.error) {
+            console.error('APIエラー:', data.error);
+            return 'エラーが発生しました。';
+        }
+
+        console.log('ChatGPTの応答:', data.text);
+        return data.text;
+    } catch (error) {
+        console.error('Error fetching response:', error);
+        return 'エラーが発生しました。';
+    }
 }
+
 
 });
 
