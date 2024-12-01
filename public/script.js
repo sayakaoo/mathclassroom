@@ -441,6 +441,7 @@ document.getElementById('sendButton').addEventListener('click', async function()
     const userInput = document.getElementById('userInput').value;
     if (userInput.trim()) {
         // ユーザーのメッセージをチャットボックスに追加
+        console.log("osita");
         const messageDiv = document.createElement('div');
         messageDiv.textContent = `ユーザー: ${userInput}`;
         document.getElementById('messages').appendChild(messageDiv);
