@@ -434,62 +434,7 @@ window.addEventListener('load', function () {
     loadModel();
 
 
-    //chatgpt用
-document.getElementById('sendButton').addEventListener('click', async function() {
-    const userInput = document.getElementById('userInput').value;
-    if (userInput.trim()) {
-        // ユーザーのメッセージをチャットボックスに追加
-        console.log("Message sent: ", userInput);
-        const messageDiv = document.createElement('div');
-        messageDiv.textContent = `ユーザー: ${userInput}`;
-        document.getElementById('messages').appendChild(messageDiv);
-        
-        // 入力欄をクリア
-        document.getElementById('userInput').value = '';
 
-        // ChatGPTの応答を取得
-        const gptResponse = await getChatGPTResponse(userInput);
-        
-        // ChatGPTの応答を表示
-        const responseDiv = document.createElement('div');
-        responseDiv.textContent = `ChatGPT: ${gptResponse}`;
-        document.getElementById('messages').appendChild(responseDiv);
-        
-        // メッセージが表示されるたびにスクロールを最下部に
-        document.getElementById('messages').scrollTop = document.getElementById('messages').scrollHeight;
-    }
-});
-
-// ChatGPTにメッセージを送信して応答を取得する関数
-async function getChatGPTResponse(userInput) {
-    try {
-        const response = await fetch('./api/chatgpt', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ userInput: userInput })
-        });
-
-        if (!response.ok) {
-            throw new Error('APIから正しいレスポンスを受け取れませんでした');
-        }
-
-        // レスポンスをJSON形式でパース
-        const data = await response.json();
-        
-        if (data.error) {
-            console.error('APIエラー:', data.error);
-            return 'エラーが発生しました。';
-        }
-
-        console.log('ChatGPTの応答:', data.text);
-        return data.text;
-    } catch (error) {
-        console.error('Error fetching response:', error);
-        return 'エラーが発生しました。';
-    }
-}
 
 
 });
